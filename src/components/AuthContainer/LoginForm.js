@@ -25,6 +25,7 @@ class LoginForm extends Component {
       email: "",
       password: "",
       confirm_password:"",
+      error:false,
       mode: "login"
     };
   }
@@ -37,7 +38,7 @@ class LoginForm extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.showModal !== this.props.showModal) {
       console.log('ki',this.props.showModal)
-      this.setState({mode:this.props.mode})
+      this.setState({mode:this.props.mode,showModal:this.props.showModal,error:false})
       
     }
   }
@@ -76,8 +77,9 @@ await axios.post('https://catchops.herokuapp.com/api/register/',{username,email,
 }).then(res=>{
   console.log(res)
    alert('You have saccessfully registered')
-   this.setState({username:"",email:""})
+   this.setState({username:"",email:"",showModal:false})
 }).catch(err=>{
+  this.setState({username:"",email:"",error:true})
   console.log(err)
 })
 }
@@ -92,9 +94,10 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
   },
 }).then(res=>{
   console.log(res)
-  this.setState({username:"",email:""})
+  this.setState({username:"",email:"",showModal:false,})
    alert('You have saccesfully logged In')
 }).catch(err=>{
+  this.setState({username:"",email:"",error:true})
   console.log(err)
 })
 }
@@ -103,10 +106,10 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
       <div>
         <div>
           <form className="form-horizontal form-loanable" onSubmit={this.register}>
-            {/* <div className="alert alert-danger alert-sm">
+            {this.state.error && <div className="alert alert-danger alert-sm">
               <button type="button" className="close" data-dismiss="alert" aria-hidden="true">×</button>
-              <span className="fw-semi-bold">Error:</span> Login failed.
-              </div> */}
+              <span className="fw-semi-bold">Error:</span> Registration failed.
+              </div> }
             <fieldset>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-email" className="col-sm-5">Username</label>
@@ -204,10 +207,10 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
     return (
       <div>
           <form className="form-horizontal form-loanable" onSubmit={this.login}>
-            {/* <div className="alert alert-danger alert-sm">
+            {this.state.error && <div className="alert alert-danger alert-sm">
               <button type="button" className="close" data-dismiss="alert" aria-hidden="true">×</button>
               <span className="fw-semi-bold">Error:</span> Login failed.
-              </div> */}
+              </div> }
             <fieldset>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-email" className="col-sm-5">Username </label>
