@@ -213,11 +213,11 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
               </div> }
             <fieldset>
               <div className="form-group has-feedback required">
-                <label htmlFor="login-email" className="col-sm-5">Username </label>
+                <label htmlFor="login-email" className="col-sm-5">Email</label>
                 <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <input
-                    type="text"
+                    type="email"
                     name="email"
                     id="login-email"
                     className="form-control"
