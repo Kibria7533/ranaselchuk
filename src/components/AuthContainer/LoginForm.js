@@ -110,7 +110,7 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
             <fieldset>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-email" className="col-sm-5">Username</label>
-                <div className="col-sm-7">
+                <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <input
                     type="text"
@@ -126,7 +126,7 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
               </div>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-email" className="col-sm-5">Enter your email</label>
-                <div className="col-sm-7">
+                <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <input
                     type="email"
@@ -142,7 +142,7 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
               </div>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-password" className="col-sm-5">Password</label>
-                <div className="col-sm-7">
+                <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <div className="login-password-wrapper">
                     <input
@@ -160,7 +160,7 @@ await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}
               </div>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-password" className="col-sm-5">Confirm Password</label>
-                <div className="col-sm-7">
+                <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <div className="login-password-wrapper">
                     <input
