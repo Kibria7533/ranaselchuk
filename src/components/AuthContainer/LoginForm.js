@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios"
 import {
   Navbar,
   NavDropdown,
@@ -20,8 +21,10 @@ class LoginForm extends Component {
     this.state = {
       showModal: false,
       smShow: false,
+      username:"",
       email: "",
       password: "",
+      confirm_password:"",
       mode: "login"
     };
   }
@@ -56,30 +59,82 @@ class LoginForm extends Component {
     );
   };
 
+  onChange=(e)=>{
+    let name=e.target.name;
+    let value=e.target.value;
+    this.setState({[name]:value})
+  }
 
+register=async(e)=>{
+  e.preventDefault();
+  const {username,email,password,confirm_password}=this.state;
+await axios.post('https://catchops.herokuapp.com/api/register/',{username,email,password,password2:confirm_password}, {
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+}).then(res=>{
+  console.log(res)
+   alert('You have saccessfully registered')
+   this.setState({username:"",email:""})
+}).catch(err=>{
+  console.log(err)
+})
+}
 
-
-
+login=async(e)=>{
+  e.preventDefault();
+  const {username,password}=this.state;
+await axios.post('https://catchops.herokuapp.com/api/login/',{username,password}, {
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+}).then(res=>{
+  console.log(res)
+  this.setState({username:"",email:""})
+   alert('You have saccesfully logged In')
+}).catch(err=>{
+  console.log(err)
+})
+}
   renderRegister = () => {
     return (
       <div>
         <div>
-          <form className="form-horizontal form-loanable">
+          <form className="form-horizontal form-loanable" onSubmit={this.register}>
             {/* <div className="alert alert-danger alert-sm">
               <button type="button" className="close" data-dismiss="alert" aria-hidden="true">×</button>
               <span className="fw-semi-bold">Error:</span> Login failed.
               </div> */}
             <fieldset>
               <div className="form-group has-feedback required">
-                <label htmlFor="login-email" className="col-sm-5">Username or email</label>
+                <label htmlFor="login-email" className="col-sm-5">Username</label>
                 <div className="col-sm-7">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <input
                     type="text"
+                    name="username"
+                    id="login-email"
+                    value={this.state.username}
+                    className="form-control"
+                    placeholder="Enter username"
+                    onChange={this.onChange}
+                  />
+                </div>
+                { /* console.log('error email ::: ' + JSON.stringify(errors)) */}
+              </div>
+              <div className="form-group has-feedback required">
+                <label htmlFor="login-email" className="col-sm-5">Enter your email</label>
+                <div className="col-sm-7">
+                  <span className="form-control-feedback" aria-hidden="true"></span>
+                  <input
+                    type="email"
                     name="email"
+                    value={this.state.email}
                     id="login-email"
                     className="form-control"
-                    placeholder="Enter username or email"
+                    placeholder="Enter  email"
                     onChange={this.onChange}
                   />
                 </div>
@@ -95,6 +150,25 @@ class LoginForm extends Component {
                       name="password"
                       id="login-password"
                       className="form-control"
+                      placeholder="*****"
+                      required
+                      onChange={this.onChange}
+                    />
+                    
+                  </div>
+                </div>
+              </div>
+              <div className="form-group has-feedback required">
+                <label htmlFor="login-password" className="col-sm-5">Confirm Password</label>
+                <div className="col-sm-7">
+                  <span className="form-control-feedback" aria-hidden="true"></span>
+                  <div className="login-password-wrapper">
+                    <input
+                      type="password"
+                      name="confirm_password"
+                      id="login-password"
+                      className="form-control"
+                      value={this.state. confirm_password}
                       placeholder="*****"
                       required
                       onChange={this.onChange}
@@ -129,14 +203,14 @@ class LoginForm extends Component {
   renderLogin = () => {
     return (
       <div>
-          <form className="form-horizontal form-loanable">
+          <form className="form-horizontal form-loanable" onSubmit={this.login}>
             {/* <div className="alert alert-danger alert-sm">
               <button type="button" className="close" data-dismiss="alert" aria-hidden="true">×</button>
               <span className="fw-semi-bold">Error:</span> Login failed.
               </div> */}
             <fieldset>
               <div className="form-group has-feedback required">
-                <label htmlFor="login-email" className="col-sm-5">Username or email</label>
+                <label htmlFor="login-email" className="col-sm-5">Username </label>
                 <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <input
@@ -144,7 +218,7 @@ class LoginForm extends Component {
                     name="email"
                     id="login-email"
                     className="form-control"
-                    placeholder="Enter username or email"
+                    placeholder="Enter  email"
                     onChange={this.onChange}
                     value={this.state.email}
                     required
