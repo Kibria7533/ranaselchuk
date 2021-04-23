@@ -36,7 +36,7 @@ class index extends Component {
 
     return (
       <div style={styles}>
-        <LoginForm showModal={this.props.showModal} onClose = {this.props.close} />
+        <LoginForm showModal={this.props.showModal} mode={this.props.mode} onClose = {this.props.close} />
      </div>
     );
   }

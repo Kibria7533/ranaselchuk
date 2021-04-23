@@ -15,8 +15,8 @@ import {
 import CreateNewAccount from "./CreateNewAccount";
 
 class LoginForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       showModal: false,
       smShow: false,
@@ -31,6 +31,13 @@ class LoginForm extends Component {
       mode
     });
   };
+  componentDidUpdate(prevProps) {
+    if (prevProps.showModal !== this.props.showModal) {
+      console.log('ki',this.props.showModal)
+      this.setState({mode:this.props.mode})
+      
+    }
+  }
 
   renderForgot = () => {
     return(
@@ -58,10 +65,10 @@ class LoginForm extends Component {
       <div>
         <div>
           <form className="form-horizontal form-loanable">
-            <div className="alert alert-danger alert-sm">
+            {/* <div className="alert alert-danger alert-sm">
               <button type="button" className="close" data-dismiss="alert" aria-hidden="true">×</button>
               <span className="fw-semi-bold">Error:</span> Login failed.
-              </div>
+              </div> */}
             <fieldset>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-email" className="col-sm-5">Username or email</label>
@@ -123,14 +130,14 @@ class LoginForm extends Component {
     return (
       <div>
           <form className="form-horizontal form-loanable">
-            <div className="alert alert-danger alert-sm">
+            {/* <div className="alert alert-danger alert-sm">
               <button type="button" className="close" data-dismiss="alert" aria-hidden="true">×</button>
               <span className="fw-semi-bold">Error:</span> Login failed.
-              </div>
+              </div> */}
             <fieldset>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-email" className="col-sm-5">Username or email</label>
-                <div className="col-sm-7">
+                <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <input
                     type="text"
@@ -147,7 +154,7 @@ class LoginForm extends Component {
               </div>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-password" className="col-sm-5">Password</label>
-                <div className="col-sm-7">
+                <div className="col-sm-12">
                   <span className="form-control-feedback" aria-hidden="true"></span>
                   <div className="login-password-wrapper">
                     <input

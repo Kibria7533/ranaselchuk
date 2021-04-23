@@ -19,10 +19,10 @@ class CreateNewAccount extends Component {
       <div>
         <div>
           <form className="form-horizontal form-loanable">
-            <div className="alert alert-danger alert-sm">
+            {/* <div className="alert alert-danger alert-sm">
               <button type="button" className="close" data-dismiss="alert" aria-hidden="true">×</button>
               <span className="fw-semi-bold">Error:</span> Login failed.
-              </div>
+              </div> */}
             <fieldset>
               <div className="form-group has-feedback required">
                 <label htmlFor="login-email" className="col-sm-5">Username or email</label>

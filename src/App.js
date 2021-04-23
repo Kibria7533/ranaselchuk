@@ -21,7 +21,8 @@ class App extends Component {
     super();
     this.state = {
       showModal : false,
-      form : ''
+      form : '',
+      mode:""
     }
   }
 
@@ -31,8 +32,8 @@ class App extends Component {
 
 
 
-  open = () => {
-    this.setState ({ showModal : true});
+  open = (mode) => {
+    this.setState ({ showModal : true,mode});
   }
 
   render(){
@@ -54,13 +55,13 @@ class App extends Component {
             </div>
             <div class="extra_menus">
               <span>pricing</span>
-              <span onClick={this.open} >login</span>
-              <span class="sign_up">sign up</span>
+              <span onClick={()=>this.open("login")} >login</span>
+              <span onClick={()=>this.open("register")} class="sign_up">sign up</span>
             </div>
           </div>
         </div>
       </div>
-      <AuthContainer showModal={this.state.showModal} close={this.close}/>
+      <AuthContainer showModal={this.state.showModal} mode={this.state.mode} close={this.close}/>
       <section class="landing">
         <div class="tie">
           <div class="landing_container">
